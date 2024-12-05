@@ -1,0 +1,5 @@
+
+image:
+  name: dev-488-tests-docker
+  imagePullPolicy: IfNotPresent
+  dockerRepo: ""
