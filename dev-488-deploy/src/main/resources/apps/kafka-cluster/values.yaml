@@ -3,6 +3,11 @@
 ########################################
 aissemble-kafka-chart:
   kafka:
+    commonAnnotations:
+        example-annotation: "$getConfigValue(groupName=values;propertyName=name)"
+    commonLabels:
+      aissemble-configuration-store: "enabled"
+      newlabel: "anewlabel"
     resources:
       limits:
         memory: 2G

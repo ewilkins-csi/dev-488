@@ -1,5 +1,8 @@
 aissemble-infrastructure-chart:
   argo-cd:
+    configs:
+      params:
+        controller.diff.server.side: "true"
     repoServer:
       env:
         - name: HELM_CACHE_HOME

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+  name: config-store
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: config-store-ns
+  project: default
+  source:
+    path: dev-488-deploy/src/main/resources/apps/config-store
+    repoURL: {{ .Values.spec.repo }}
+    targetRevision: {{ .Values.spec.targetRevision }}
+    {{ if .Values.spec.helm.valueFiles }}
+    helm:
+      valueFiles:
+        {{- range .Values.spec.helm.valueFiles }}
+        - {{ . }}
+        {{- end }}    
+    {{ end }}
+  {{- with .Values.spec.syncPolicy }}
+  syncPolicy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}

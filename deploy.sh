@@ -7,6 +7,7 @@ print_usage() {
   echo "Usage: $0 [up|down|shutdown]"
   echo "   up          deploy application (automatically starts deployment infrastructure if needed)"
   echo "   down        tear down application"
+  echo "   startup     standup deployment infrastructure"
   echo "   shutdown    tear down deployment infrastructure"
 }
 
@@ -77,6 +78,8 @@ if [ "$1" = "up" ]; then
   deploy
 elif [ "$1" = "down" ]; then
   down
+elif [ "$1" = "startup" ]; then
+  startup
 elif [ "$1" = "shutdown" ]; then
   shutdown
 else
